@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--Заголовок страницы-->
+    <title>X3D</title>
+
+    <!--Подключение таблицы стилей paint.css-->
+    <link rel="stylesheet" type="text/css" href="x3dObjects.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://www.x3dom.org/download/x3dom.css">
+    </link>
+    <script type="text/javascript" src="http://www.x3dom.org/download/x3dom.js"></script>
+</head>
+
+<body>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col">
+                <x3d id="X3DScene" showLog="false" x="0px" y="0px" width="500px" height="500px">
+                    <scene>
+                        <background skyColor='0.15 0.15 0.15'></background>
+                        <viewpoint position='0 0 5'></viewpoint>
+                        <transform id="X3DTransformRoot" translation="0 0 0">
+                            <shape>
+                                <appearance>
+                                    <texture>
+                                        <canvas width='512' height='512' id='textureCanvas'>
+                                    </texture>
+                                    <material diffuseColor='0 0 0'></material>
+                                </appearance>
+                                <box></box>
+                            </shape>
+                        </transform>
+                    </scene>
+                </x3d>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                One of three columns
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <x3d width='500px' height='400px'>
+                    <scene>
+                        <background skyColor='0.15 0.15 0.15'></background>
+                        <shape>
+                            <appearance>
+                                <material diffuseColor='1 1 1'></material>
+                            </appearance>
+                            <box></box>
+                        </shape>
+                    </scene>
+                </x3d>
+            </div>
+            <div class="col">
+                Desc
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+<!--Подключение Java Script кода-->
+<!-- <script src="x3dObjects.js"></script> -->
+
+</html>
