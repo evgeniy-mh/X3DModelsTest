@@ -1,24 +1,22 @@
 class X3DModel {
-  constructor(modelURL, modelDescription) {
+  constructor(modelURL, modelDescriptionURL) {
     this.modelURL = modelURL;
-    this.modelDescription = modelDescription;
+    this.modelDescriptionURL = modelDescriptionURL;
   }
 }
 
 var modelsListContainer = document.getElementById('modelsListContainer');
 
+const modelsDirectory="x3d/";
 Models = [
-    new X3DModel("x3d/Deer.x3d", "desc"),
-    new X3DModel("x3d/cube.x3d", "desc cube"),
-    new X3DModel("x3d/cone.x3d", "desc cone"),
-    new X3DModel("x3d/cylinder.x3d", "desc cube"),
-    new X3DModel("x3d/sphere.x3d", "desc cube"),
-    new X3DModel("x3d/torus.x3d", "desc cube"),
+  new X3DModel(modelsDirectory+"cube.x3d", modelsDirectory+"cube.txt"),
+  new X3DModel(modelsDirectory+"cone.x3d", modelsDirectory+"cone.txt"),
+  new X3DModel(modelsDirectory+"cylinder.x3d", modelsDirectory+"cylinder.txt"),
+  new X3DModel(modelsDirectory+"sphere.x3d", modelsDirectory+"sphere.txt"),
+  new X3DModel(modelsDirectory+"torus.x3d", modelsDirectory+"torus.txt"),
 ];
 
 function createX3DModel(model) {
-  console.log(model);
-
   var inline = document.createElement("inline");
   inline.setAttribute("url", model.modelURL);
 
@@ -38,14 +36,18 @@ function createX3DModelsList() {
     var divWX3DElement = document.createElement("div");
     divWX3DElement.setAttribute("class", "col");
     var x3d = createX3DModel(element);
-    //var x3d = document.createTextNode("sdfdsfsd");
+    // var x3d = document.createTextNode("sdfdsfsd");
     divWX3DElement.appendChild(x3d);
 
     var divWModelDescription = document.createElement("div");
     divWModelDescription.setAttribute("class", "col");
-    var modelDescription = document.createTextNode(element.modelDescription);
-    divWModelDescription.appendChild(
-    document.createTextNode(element.modelDescription));
+
+    fetch(element.modelDescriptionURL)
+        .then(response => response.text())
+        .then(text => {
+          var modelDescription = document.createTextNode(text);
+          divWModelDescription.appendChild(modelDescription);
+        });
 
     var divRow = document.createElement("div");
     divRow.setAttribute("class", "row");
@@ -110,10 +112,4 @@ function clearX3DViev() {
       break;
     }
   }
-}
-
-//Функция возвращающая название выбранной трехмерной модели
-function getX3DModel() {
-  return ShapeSelectListBox.options[ShapeSelectListBox.selectedIndex]
-      .attributes.name.value;
 }
