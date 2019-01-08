@@ -1,27 +1,28 @@
 class X3DModel {
-  constructor(modelURL, modelDescriptionURL) {
-    this.modelURL = modelURL;
-    this.modelDescriptionURL = modelDescriptionURL;
-  }
+  constructor(name) { this.name = name; }
+
+  getX3DModelName() { return this.name + ".x3d"; }
+
+  getModelDescription() { return this.name + ".html" }
 }
 
 var modelsListContainer = document.getElementById('modelsListContainer');
 
-const modelsDirectory="x3d/";
+const modelsDirectory = "x3d/";
 Models = [
-  new X3DModel(modelsDirectory+"cube.x3d", modelsDirectory+"cube.html"),
-  new X3DModel(modelsDirectory+"cone.x3d", modelsDirectory+"cone.html"),
-  new X3DModel(modelsDirectory+"cylinder.x3d", modelsDirectory+"cylinder.html"),
-  new X3DModel(modelsDirectory+"sphere.x3d", modelsDirectory+"sphere.html"),
-  new X3DModel(modelsDirectory+"torus.x3d", modelsDirectory+"torus.html"),
+  new X3DModel(modelsDirectory + "cube"),
+  new X3DModel(modelsDirectory + "cone"),
+  new X3DModel(modelsDirectory + "cylinder"),
+  new X3DModel(modelsDirectory + "sphere"),
+  new X3DModel(modelsDirectory + "torus"),
 ];
 
 function createX3DModel(model) {
   var inline = document.createElement("inline");
-  inline.setAttribute("url", model.modelURL);
+  inline.setAttribute("url", model.getX3DModelName());
 
   var scene = document.createElement("scene");
-  scene.setAttribute("id", model.modelURL + "Scene");
+  scene.setAttribute("id", model.getX3DModelName() + "Scene");
   scene.appendChild(inline);
 
   var x3d = document.createElement("x3d");
@@ -42,12 +43,12 @@ function createX3DModelsList() {
     var divWModelDescription = document.createElement("div");
     divWModelDescription.setAttribute("class", "col");
 
-    fetch(element.modelDescriptionURL)
+    fetch(element.getModelDescription())
         .then(response => response.text())
         .then(text => {
           /*var modelDescription = document.createTextNode(text);
           divWModelDescription.appendChild(modelDescription);*/
-          divWModelDescription.innerHTML=text;
+          divWModelDescription.innerHTML = text;
         });
 
     var divRow = document.createElement("div");
