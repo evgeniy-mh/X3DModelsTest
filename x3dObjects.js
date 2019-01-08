@@ -7,7 +7,14 @@ class X3DModel {
 
 var modelsListContainer = document.getElementById('modelsListContainer');
 
-Models = [new X3DModel("x3d/Deer.x3d", "desc"),new X3DModel("x3d/cube.x3d", "desc cube")];
+Models = [
+    new X3DModel("x3d/Deer.x3d", "desc"),
+    new X3DModel("x3d/cube.x3d", "desc cube"),
+    new X3DModel("x3d/cone.x3d", "desc cone"),
+    new X3DModel("x3d/cylinder.x3d", "desc cube"),
+    new X3DModel("x3d/sphere.x3d", "desc cube"),
+    new X3DModel("x3d/torus.x3d", "desc cube"),
+];
 
 function createX3DModel(model) {
   console.log(model);
