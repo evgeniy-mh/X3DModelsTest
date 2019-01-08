@@ -9,11 +9,11 @@ var modelsListContainer = document.getElementById('modelsListContainer');
 
 const modelsDirectory="x3d/";
 Models = [
-  new X3DModel(modelsDirectory+"cube.x3d", modelsDirectory+"cube.txt"),
-  new X3DModel(modelsDirectory+"cone.x3d", modelsDirectory+"cone.txt"),
-  new X3DModel(modelsDirectory+"cylinder.x3d", modelsDirectory+"cylinder.txt"),
-  new X3DModel(modelsDirectory+"sphere.x3d", modelsDirectory+"sphere.txt"),
-  new X3DModel(modelsDirectory+"torus.x3d", modelsDirectory+"torus.txt"),
+  new X3DModel(modelsDirectory+"cube.x3d", modelsDirectory+"cube.html"),
+  new X3DModel(modelsDirectory+"cone.x3d", modelsDirectory+"cone.html"),
+  new X3DModel(modelsDirectory+"cylinder.x3d", modelsDirectory+"cylinder.html"),
+  new X3DModel(modelsDirectory+"sphere.x3d", modelsDirectory+"sphere.html"),
+  new X3DModel(modelsDirectory+"torus.x3d", modelsDirectory+"torus.html"),
 ];
 
 function createX3DModel(model) {
@@ -45,8 +45,9 @@ function createX3DModelsList() {
     fetch(element.modelDescriptionURL)
         .then(response => response.text())
         .then(text => {
-          var modelDescription = document.createTextNode(text);
-          divWModelDescription.appendChild(modelDescription);
+          /*var modelDescription = document.createTextNode(text);
+          divWModelDescription.appendChild(modelDescription);*/
+          divWModelDescription.innerHTML=text;
         });
 
     var divRow = document.createElement("div");
