@@ -62,7 +62,7 @@ function setAttributes(el, attrs) {
 
 function loadPageHeader() {
   $(function() {
-    $('#page-header').load('header.html');
+    $('#page-header').load('components/header.html');
   });
 }
 
