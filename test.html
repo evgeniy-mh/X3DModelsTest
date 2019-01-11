@@ -4,7 +4,7 @@
 <head>
     <title>X3D</title>
     <!--Подключение таблицы стилей paint.css-->
-    <link rel="stylesheet" type="text/css" href="components/x3dObjects.css">
+    <link rel="stylesheet" type="text/css" href="components/X3DObjects.css">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="http://www.x3dom.org/download/x3dom.css">
     </link>
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="container" id="modelsListContainer">
+    <div class="container">
 
         <div id="page-header"></div>
 
@@ -22,7 +22,29 @@
                 <h1>Тест</h1>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col" id="modelContainer"></div>
+
+            <div class="col">
+
+                Что это за фигура?
+
+                <div class="btn-group" id="answerButtonsContainer" >
+                    <button type="button" class="btn btn-secondary">Left</button>
+                    <button type="button" class="btn btn-secondary">Middle</button>
+                    <button type="button" class="btn btn-secondary">Right</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+
     </div>
+    <script src="components/X3DModel.js"></script>
+    <script src="components/X3DModelsList.js"></script>
     <script src="components/test.js"></script>
 </body>
 
