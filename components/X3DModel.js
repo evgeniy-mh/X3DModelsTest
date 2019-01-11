@@ -7,6 +7,4 @@ class X3DModel {
   getX3DModelName() { return this.name + ".x3d"; }
 
   getModelDescription() { return this.name + ".html" }
-
-  getRUSModelName() { return this.rusName; }
 }

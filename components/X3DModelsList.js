@@ -1,8 +1,8 @@
 const modelsDirectory = "x3d/";
 Models = [
-  new X3DModel(modelsDirectory + "cube"),
-  new X3DModel(modelsDirectory + "cone"),
-  new X3DModel(modelsDirectory + "cylinder"),
-  new X3DModel(modelsDirectory + "sphere"),
-  new X3DModel(modelsDirectory + "torus"),
+  new X3DModel(modelsDirectory + "cube","Куб"),
+  new X3DModel(modelsDirectory + "cone","Конус"),
+  new X3DModel(modelsDirectory + "cylinder","Конус"),
+  new X3DModel(modelsDirectory + "sphere","Сфера"),
+  new X3DModel(modelsDirectory + "torus","Тор"),
 ]; 
