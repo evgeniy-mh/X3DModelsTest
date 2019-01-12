@@ -1,6 +1,6 @@
 var modelsListContainer = document.getElementById('modelsListContainer');
 
-function createX3DModel(model) {
+function createX3DScene(model) {
   var inline = document.createElement("inline");
   inline.setAttribute("url", model.getX3DModelName());
 
@@ -19,7 +19,7 @@ function createX3DModelsList() {
   Models.forEach(element => {
     var divWX3DElement = document.createElement("div");
     divWX3DElement.setAttribute("class", "col");
-    var x3d = createX3DModel(element);
+    var x3d = createX3DScene(element);
     // var x3d = document.createTextNode("sdfdsfsd");
     divWX3DElement.appendChild(x3d);
 

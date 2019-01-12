@@ -18,15 +18,25 @@ var answers = [];
 //
 var rightAnswer;
 
-(function() { initQuestionsList(); })();
+(function() {
+  initQuestionsList();
+  loadX3DContainerToDOM();
+})();
 
-function createX3DModel(model) {
+function createX3DInline(model) {
   var inline = document.createElement("inline");
-  inline.setAttribute("url", model.getX3DModelName());
+  setAttributes(inline, {"url": model.getX3DModelName(), "id": model.name});
+  return inline;
+}
 
+function createX3DContainer(model) {
   var scene = document.createElement("scene");
-  scene.setAttribute("id", model.getX3DModelName());
-  scene.appendChild(inline);
+  scene.setAttribute("id", "X3DScene");
+
+  if (model !== null) {
+    var inline = createX3DInline(model);
+    scene.appendChild(inline);
+  }
 
   var x3d = document.createElement("x3d");
   setAttributes(x3d, {"id": "x3dElement", "width": "400px", "height": "300px"});
@@ -35,10 +45,12 @@ function createX3DModel(model) {
   return x3d;
 }
 
-function loadX3DContainer(model) {
+function loadX3DContainerToDOM() {
   var divWX3DElement = document.createElement("div");
   divWX3DElement.setAttribute("class", "col");
-  var x3d = createX3DModel(model);
+  // var x3d = createX3DScene(model);
+  var x3d = createX3DContainer(null);
+
   divWX3DElement.appendChild(x3d);
 
   var divRow = document.createElement("div");
@@ -48,8 +60,17 @@ function loadX3DContainer(model) {
   modelContainer.appendChild(divRow);
 }
 
-function deleteX3DCurrentModel() {
-  document.getElementById("x3dElement").remove();
+function loadX3DInlineToX3DContainer(model) {
+  var scene = document.getElementById("X3DScene");
+  scene.appendChild(createX3DInline(model));
+}
+
+function deleteX3DInlineFromX3DContainer(model) {
+  var scene = document.getElementById("X3DScene");
+  var inline = document.getElementById(model.name);
+  if (inline !== null) {
+    scene.removeChild(inline);
+  }
 }
 
 //Функия позволяющая быстро задавать необходимые параметры HTML элементов при их
@@ -62,14 +83,10 @@ function setAttributes(el, attrs) {
 
 function initModelAnswers(rightAnswer) {
   var numberOfAnswers = 4;
-  /*for (i = 0; i < numberOfAnswers - 1; i++) {
-    var nextIndex = Math.floor(Math.random() * Models.length);
-    this.answers.push(Models[nextIndex]);
-  }*/
 
   //Добавить правильный ответ
   this.rightAnswer = rightAnswer;
-  this.answers.length=0;
+  this.answers.length = 0;
   this.answers.push(rightAnswer);
 
   //Найти случайные неправильные ответы
@@ -103,14 +120,13 @@ function initModelAnswers(rightAnswer) {
     answerButtonsContainer.appendChild(button);
   });
 
-  //loadX3DContainer(this.rightAnswer);
-  loadX3DContainer(this.rightAnswer);
+  // loadX3DContainer(this.rightAnswer);
+  //loadX3DInlineToX3DContainer(this.rightAnswer);
 }
 
 function initQuestionsList() {
   questions = Models.slice(0);
   shuffleArray(questions);
-  initModelAnswers(questions[questionIndex]);
 }
 
 function checkAnswer(event) {
@@ -120,9 +136,15 @@ function checkAnswer(event) {
 }
 
 function nextQuestion() {
-  deleteX3DCurrentModel();
-  questionIndex++;
+  deleteX3DInlineFromX3DContainer(questions[questionIndex]);
+  questionIndex++;  
   initModelAnswers(questions[questionIndex]);
+  loadX3DInlineToX3DContainer(this.rightAnswer);
+}
+
+function startTest() {
+  initModelAnswers(questions[questionIndex]);
+  loadX3DInlineToX3DContainer(this.rightAnswer);
 }
 
 //Алгоритм Фишера–Йетса для случайной перестановки элементов в массиве
