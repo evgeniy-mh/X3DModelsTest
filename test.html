@@ -10,6 +10,7 @@
     </link>
     <script type="text/javascript" src="http://www.x3dom.org/download/x3dom.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -24,21 +25,39 @@
         </div>
 
         <div class="row">
-            <div class="col" id="modelContainer"></div>
-
             <div class="col">
+                <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseTest"
+                    aria-expanded="false" aria-controls="collapseTest">
+                    Начать тест
+                </button>
+                <div class="collapse" id="collapseTest">
+                    <div class="card card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col" id="modelContainer"></div>
 
-                Что это за фигура?
+                                <div class="col">
 
-                <div class="btn-group" id="answerButtonsContainer" >
-                    <!-- <button type="button" class="btn btn-secondary">Left</button> -->
+                                    Что это за фигура?
+
+                                    <div class="btn-group" id="answerButtonsContainer"></div>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3">
+                                <div class="col">
+                                    <button type="button" class="btn btn-primary btn-block" onclick="nextQuestion()">Далее</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
         </div>
 
-        <div class="row">
 
-        </div>
 
     </div>
     <script src="components/X3DModel.js"></script>
