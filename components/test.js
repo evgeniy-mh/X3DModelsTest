@@ -1,5 +1,8 @@
 var modelContainer = document.getElementById('modelContainer');
 var answerButtonsContainer = document.getElementById('answerButtonsContainer');
+var questionNumberContainer =
+    document.getElementById('questionNumberContainer');
+var userScoreContainer = document.getElementById('userScoreContainer');
 
 function loadPageHeader() {
   $(function() { $('#page-header').load('components/header.html'); });
@@ -15,8 +18,13 @@ var questionIndex = 0;
 //Массив фигур. Содержит правильный ответ и несколько неправильных.
 var answers = [];
 
-//
+//Правильный ответ
 var rightAnswer;
+
+//Баллы пользователя
+userScore = 0;
+//Количество правильных ответов
+rightAnswersCount=0;
 
 (function() {
   initQuestionsList();
@@ -121,7 +129,7 @@ function initModelAnswers(rightAnswer) {
   });
 
   // loadX3DContainer(this.rightAnswer);
-  //loadX3DInlineToX3DContainer(this.rightAnswer);
+  // loadX3DInlineToX3DContainer(this.rightAnswer);
 }
 
 function initQuestionsList() {
@@ -131,20 +139,44 @@ function initQuestionsList() {
 
 function checkAnswer(event) {
   if (event.target.innerText === rightAnswer.rusName) {
-    console.log("da");
+    //Правильный ответ на вопрос
+    userScore += 10;
+    rightAnswersCount++;
+    nextQuestion();
+  } else {
+    //Неправильный ответ на вопрос
+    nextQuestion();
   }
 }
 
 function nextQuestion() {
+
+  if(questionIndex+1===questions.length){ //Все вопросы пройдены
+    endTest();
+    return;
+  }
+
   deleteX3DInlineFromX3DContainer(questions[questionIndex]);
-  questionIndex++;  
+  questionIndex++;
   initModelAnswers(questions[questionIndex]);
   loadX3DInlineToX3DContainer(this.rightAnswer);
+  updateTestInfo();
 }
 
 function startTest() {
   initModelAnswers(questions[questionIndex]);
   loadX3DInlineToX3DContainer(this.rightAnswer);
+  updateTestInfo();
+}
+
+function endTest(){
+  alert(`Вы набрали ${userScore} баллов и ответили на ${rightAnswersCount} из ${questions.length} правильно.` );
+}
+
+function updateTestInfo() {
+  questionNumberContainer.innerText =
+      `${questionIndex+1} из ${questions.length}`;
+  userScoreContainer.innerText = userScore;
 }
 
 //Алгоритм Фишера–Йетса для случайной перестановки элементов в массиве
