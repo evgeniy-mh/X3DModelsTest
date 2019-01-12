@@ -24,7 +24,7 @@ var rightAnswer;
 //Баллы пользователя
 userScore = 0;
 //Количество правильных ответов
-rightAnswersCount=0;
+rightAnswersCount = 0;
 
 (function() {
   initQuestionsList();
@@ -79,6 +79,15 @@ function deleteX3DInlineFromX3DContainer(model) {
   if (inline !== null) {
     scene.removeChild(inline);
   }
+}
+
+function clearX3DInlineFromX3DContainer(){
+  /*var scene = document.getElementById("X3DScene");
+  scene.childNodes.forEach(node=>{
+    console.log(node);
+    node.remove();
+  })*/
+  $(X3DScene).empty();
 }
 
 //Функия позволяющая быстро задавать необходимые параметры HTML элементов при их
@@ -150,8 +159,7 @@ function checkAnswer(event) {
 }
 
 function nextQuestion() {
-
-  if(questionIndex+1===questions.length){ //Все вопросы пройдены
+  if (questionIndex + 1 === questions.length) {  //Все вопросы пройдены
     endTest();
     return;
   }
@@ -169,8 +177,26 @@ function startTest() {
   updateTestInfo();
 }
 
-function endTest(){
-  alert(`Вы набрали ${userScore} баллов и ответили на ${rightAnswersCount} из ${questions.length} правильно.` );
+function endTest() {
+  // alert(`Вы набрали ${userScore} баллов и ответили на ${rightAnswersCount} из
+  // ${questions.length} правильно.` );
+  document.getElementById("endTestInfoContainer").innerText =
+      `Вы набрали ${userScore} баллов и ответили на ${rightAnswersCount} из ${questions.length} правильно.`;
+  document.getElementById("endTestModalLabel").innerText =
+      rightAnswersCount === questions.length ? "Вы прошли тест!" :
+                                               "Вы не прошли тест";
+  $('#endTestModal').modal('show')
+}
+
+function startTestAgain(){
+  clearX3DInlineFromX3DContainer();
+  questionIndex = 0;
+  userScore = 0;
+  rightAnswersCount = 0;
+  initQuestionsList();
+  initModelAnswers(questions[questionIndex]);  
+  nextQuestion();
+  startTest();
 }
 
 function updateTestInfo() {
